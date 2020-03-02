@@ -2,18 +2,18 @@ module.exports = {
   port: 9000,
   routes: [{
       path: "accounts",
-      port: "7001"
+      port: "9001"
     }, {
       path: "contacts",
-      port: "7002"
+      port: "9002"
     },
     {
       path: "subjects",
-      port: "7003"
+      port: "9003"
     },
     {
       path: "videos",
-      port: "7004"
+      port: "9004"
     }
   ]
 
