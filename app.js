@@ -4,13 +4,39 @@ var httpProxy = require('http-proxy');
 var consoleArguments = require('minimist');
 var argv = consoleArguments(process.argv.slice(2));
 var proxy = httpProxy.createProxyServer();
+// var CONFIG = require('./config.js');
+// var PORT = CONFIG.port?CONFIG.port:8081;
+// PORT = argv['port']?argv['port']:PORT; 
+// PORT = process.env.port?process.env.port:PORT; 
+
+// var path = null;
+// var port = null;
+// var configs = CONFIG.routes;
+// if(!configs) {
+//     console.error("No configuration found");
+//     process.exit(0);
+// }
+
+
+
+// console.log("Starting api gateway server at port "+PORT);
+
 var CONFIG = require('./config.js');
+var NODE_ENV = process.env.NODE_ENV?process.env.NODE_ENV:"development";
+console.log("environment is " + NODE_ENV);
+if(!CONFIG[NODE_ENV]) {
+    console.log("Gateway configuration for environment "+NODE_ENV+" not found. Exiting...");
+    process.exit(0);
+}
+CONFIG = CONFIG[NODE_ENV];
+
 var PORT = CONFIG.port?CONFIG.port:8081;
 PORT = argv['port']?argv['port']:PORT; 
 PORT = process.env.port?process.env.port:PORT; 
 
 var path = null;
 var port = null;
+
 var configs = CONFIG.routes;
 if(!configs) {
     console.error("No configuration found");
